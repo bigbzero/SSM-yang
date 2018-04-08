@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.demo.dao.GameDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="Game" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+		id,
+		name,
+		size,
+		type
+		FROM
+		game
+		WHERE
+		id = #{id}
+	</select>
+
+	<select id="queryAll" resultType="Game">
+		SELECT
+		id,
+		name,
+		size,
+		type
+		FROM
+		game
+		ORDER BY
+		id
+		LIMIT #{offset}, #{limit}
+	</select>
+	<insert id="newGame" parameterType="Game" resultType="Game">
+		INSERT INTO
+		game(name, size, type)
+		values
+		(#{name}, #{size}, #{type})
+	</insert>
+
+	<update id="updateGame" parameterType="Game" resultType="Game">
+		UPDATE
+		game
+		SET name = #{name},
+		size = #{size},
+		type = #{type}
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteGame" parameterType="Game">
+		delete from game
+		where
+		id =
+		#{id}
+	</delete>
+</mapper>
